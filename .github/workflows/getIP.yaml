@@ -1,9 +1,7 @@
 name: CD to AKS
 
 on:
-  push:
-    branches:
-      - main
+  workflow_dispatch:
 
 jobs:
   deploy:
@@ -23,10 +21,6 @@ jobs:
         run: |
           mkdir -p $HOME/.kube
           echo "${{ secrets.AZURE_KUBECONFIG }}" > $HOME/.kube/config
-
-      - name: Deploy to AKS
-        run: |
-          kubectl apply -f k8s/deployment.yaml
 
       - name: Verify deployment
         run: |
