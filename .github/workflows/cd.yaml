@@ -1,9 +1,10 @@
-name: CD to AKS
+name: Blog Application CD
 
 on:
-  push:
-    branches:
-      - main
+  workflow_run:
+    workflows: [ "Blog Application CI" ]
+    types:
+      - completed
 
 jobs:
   deploy:
@@ -23,6 +24,14 @@ jobs:
         run: |
           mkdir -p $HOME/.kube
           echo "${{ secrets.AZURE_KUBECONFIG }}" > $HOME/.kube/config
+      - name: Set up variables
+        id: vars
+        run: echo "sha_short=$(git rev-parse --short HEAD)" >> $GITHUB_OUTPUT
+
+      - name: Update deployment image tag
+        run: |
+           sed -i "s|romitsutariya/blog-application:.*|romitsutariya/blog-application:${{ steps.vars.outputs.sha_short }}|g" k8s/deployment.yaml
+           cat k8s/deployment.yaml | grep romitsutariya
 
       - name: Deploy to AKS
         run: |
