@@ -11,4 +11,10 @@ public class BlogController {
     public String check(){
         return "Application is up and running...!";
     }
+
+    @GetMapping(path = {"/greeting"})
+    public String greeting(){
+        return "Ready!!!";
+    }
+
 }
