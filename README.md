@@ -2,6 +2,25 @@
 
 Sample blog application to demonstrate the CI/CD pipeline using GitHub action.
 
+- Docker lab : https://learning.oreilly.com/interactive-lab/linux-sandbox/9781492086291/lab
+- Azure K8S lab : https://learning.oreilly.com/interactive-lab/kubernetes-service-aks/9781098131234/lab
+
+### Install Java
+```shell
+sudo apt update && \ 
+sudo apt install openjdk-21-jdk -y
+```
+### Git Clone 
+Clone project in linux box
+```shell
+git clone https://github.com/romitsutariya/blog-application.git
+```
+
+### Compile project
+Compile java project with maven build on JDK 21
+```shell
+mvn install
+```
 ### Endpoints :
 We have expose the HTTP GET endpoint on `/api/v1/check` path on port 8080. we can try hitting this in curl or in web browser
 ```bash
