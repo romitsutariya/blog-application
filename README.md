@@ -11,7 +11,11 @@ docker build -t blog-app .
 
 ### Docker
 The application is containerized using Docker. The Dockerfile is configured to use Amazon Corretto as the base image. To build and run the Docker container:
-
+#### Install Docker 
+```shell
+curl -fsSL https://get.docker.com -o get-docker.sh
+sudo sh ./get-docker.sh
+```
 #### Build the Docker Image
 ```docker
 docker build -t blog-app .
