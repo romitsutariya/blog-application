@@ -30,7 +30,7 @@ jobs:
       - name: Apply Deployment YAML
         run: |
           echo "Updated deployment to have replicas: ${{ github.event.inputs.replicas }}"
-          kubectl scale --replicas=5 deployment/blog-application
+          kubectl scale --replicas=${{ github.event.inputs.replicas }} deployment/blog-application
 
       - name: Check number of Pods
         run: |
