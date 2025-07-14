@@ -27,15 +27,10 @@ jobs:
           mkdir -p $HOME/.kube
           echo "${{ secrets.AZURE_KUBECONFIG }}" > $HOME/.kube/config
 
-      - name: Update Deployment Replica Count
-        run: |
-          sed -i "s/replicas: .*/replicas: ${{ github.event.inputs.replicas }}/" k8s/deployment.yaml
-          echo "Updated deployment.yaml to have replicas: ${{ github.event.inputs.replicas }}"
-          cat k8s/deployment.yaml
-
       - name: Apply Deployment YAML
         run: |
-          kubectl apply -f k8s/deployment.yaml
+          echo "Updated deployment to have replicas: ${{ github.event.inputs.replicas }}"
+          kubectl scale --replicas=5 deployment/blog-application
 
       - name: Check number of Pods
         run: |
